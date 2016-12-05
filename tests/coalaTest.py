@@ -63,23 +63,23 @@ class coalaTest(unittest.TestCase):
 
     def test_show_all_bears(self):
         with bear_test_module():
-            retval, output = execute_coala(coala.main, 'coala', '-B')
+            retval, output = execute_coala(coala.main, 'coala', '-B', '-I')
             self.assertEqual(retval, 0)
-            # 6 bears plus 1 line holding the closing colour escape sequence
+            # 6 bears plus 1 line holding the closing colour escape sequence.
             self.assertEqual(len(output.strip().splitlines()), 7)
 
     def test_show_language_bears(self):
         with bear_test_module():
             retval, output = execute_coala(
-                coala.main, 'coala', '-B', '-l', 'java')
+                coala.main, 'coala', '-B', '-l', 'java', '-I')
             self.assertEqual(retval, 0)
-            # 2 bears plus 1 line holding the closing colour escape sequence
+            # 2 bears plus 1 line holding the closing colour escape sequence.
             self.assertEqual(len(output.splitlines()), 3)
 
     def test_show_capabilities_with_supported_language(self):
         with bear_test_module():
             retval, output = execute_coala(
-                coala.main, 'coala', '-p', 'R')
+                coala.main, 'coala', '-p', 'R', '-I')
             self.assertEqual(retval, 0)
             self.assertEqual(len(output.splitlines()), 2)
 
