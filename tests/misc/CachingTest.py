@@ -146,13 +146,11 @@ class CachingTest(unittest.TestCase):
                 retval, output = execute_coala(
                    coala.main,
                    'coala',
-                   '-c', filename + '.coafile',
-                   '-f', filename + 'test.py')
+                   '-c', filename + '.coafile')
                 self.assertIn('This file has', output)
 
             retval, output = execute_coala(
                coala.main,
                'coala',
-               '-c', filename + '.coafile',
-               '-f', filename + 'test.py')
+               '-c', filename + '.coafile')
             self.assertIn('This file has', output)
