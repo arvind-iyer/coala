@@ -61,13 +61,7 @@ class ConfWriterTest(unittest.TestCase):
         self.assertRaises(TypeError, self.uut.write_section, 5)
 
     def test_write(self):
-        result_file = ['[Default]\n',
-                       'save = true\n',
-                       'a_default, another = val\n',
-                       '# thats a comment\n',
-                       'test = push\n',
-                       't = \n',
-                       '[Section]\n',
+        result_file = ['[Section]\n',
                        '[MakeFiles]\n',
                        'j, ANother = a\n',
                        'multiline\n',
@@ -80,10 +74,16 @@ class ConfWriterTest(unittest.TestCase):
                        'key\\,comma = value,comma\n',
                        'key\\#hash = value\\#hash\n',
                        'key\\.dot = value.dot\n',
-                       'a_default += val2\n']
+                       'a_default += val2\n',
+                       '[cli]\n',
+                       'save = true\n',
+                       'a_default, another = val\n',
+                       '# thats a comment\n',
+                       'test = push\n',
+                       't = \n']
         sections = load_configuration(['-c', escape(self.file, '\\')],
                                       self.log_printer)[0]
-        del sections['default'].contents['config']
+        del sections['cli'].contents['config']
         self.uut.write_sections(sections)
         self.uut.close()
 
@@ -96,8 +96,7 @@ class ConfWriterTest(unittest.TestCase):
         with open(self.file, 'w', encoding='utf-8') as file:
             file.write(self.append_example_file)
 
-        result_file = ['[Default]\n',
-                       '[defaults]\n',
+        result_file = ['[defaults]\n',
                        'a = 4\n',
                        'b = 4,5,6\n',
                        'c = 4,5\n',
@@ -105,11 +104,12 @@ class ConfWriterTest(unittest.TestCase):
                        '[defaults.new]\n',
                        'b += 7\n',
                        'c += 6, 7\n',
-                       'a, d += 5, 6, 7\n']
+                       'a, d += 5, 6, 7\n',
+                       '[cli]\n']
 
         sections = load_configuration(['-c', escape(self.file, '\\')],
                                       self.log_printer)[0]
-        del sections['default'].contents['config']
+        del sections['cli'].contents['config']
         self.uut.write_sections(sections)
         self.uut.close()
 

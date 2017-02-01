@@ -105,6 +105,7 @@ class coalaJSONTest(unittest.TestCase):
             ".*\\[ERROR\\].*The requested coafile '.*' does not exist. .+\n")
 
     def test_output_file(self):
+        self.maxDiff = None
         with prepare_file(['#todo this is todo'], None) as (lines, filename):
             retval, output = execute_coala(coala.main, 'coala', '--json',
                                            '-c', os.devnull,
