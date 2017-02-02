@@ -91,6 +91,8 @@ request but should ideally pass for every commit.
 For the Reviewers
 -----------------
 
+-  Read and try to understand the code. If something looks ineffective or
+   bug prone, leave a comment.
 -  Generated code is not intended to be reviewed. Instead rather try to
    verify that the generation was done right. The commit message should
    expose that.
